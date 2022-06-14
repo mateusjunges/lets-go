@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"github.com/mateusjunges/lets-go/pkg/config"
 	"github.com/mateusjunges/lets-go/pkg/models"
 	"github.com/mateusjunges/lets-go/pkg/render"
@@ -63,12 +64,19 @@ func (m *Repository) Generals(w http.ResponseWriter, request *http.Request) {
 	render.Template(w, request, "generals.page.tmpl", &models.TemplateData{})
 }
 
-// SearchAvailability renders the search availability page
-func (m *Repository) SearchAvailability(w http.ResponseWriter, request *http.Request) {
+// DisplaySearchAvailability renders the search availability page
+func (m *Repository) DisplaySearchAvailability(w http.ResponseWriter, request *http.Request) {
 	render.Template(w, request, "search-availability.page.tmpl", &models.TemplateData{})
 }
 
 // Contact renders the contact page
 func (m *Repository) Contact(w http.ResponseWriter, request *http.Request) {
 	render.Template(w, request, "contact.page.tmpl", &models.TemplateData{})
+}
+
+func (m *Repository) SearchAvailability(w http.ResponseWriter, request *http.Request) {
+	start := request.Form.Get("start")
+	end := request.Form.Get("end")
+
+	_, _ = w.Write([]byte(fmt.Sprintf("start date is %s and end date is %s", start, end)))
 }
