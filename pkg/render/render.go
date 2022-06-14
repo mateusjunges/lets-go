@@ -3,6 +3,7 @@ package render
 import (
 	"bytes"
 	"fmt"
+	"github.com/justinas/nosurf"
 	"github.com/mateusjunges/lets-go/pkg/config"
 	"github.com/mateusjunges/lets-go/pkg/models"
 	"html/template"
@@ -19,11 +20,12 @@ func NewTemplates(a *config.AppConfig) {
 	app = a
 }
 
-func AddDefaultData(td *models.TemplateData) *models.TemplateData {
+func AddDefaultData(td *models.TemplateData, r *http.Request) *models.TemplateData {
+	td.CsrfToken = nosurf.Token(r)
 	return td
 }
 
-func Template(w http.ResponseWriter, tmpl string, td *models.TemplateData) {
+func Template(w http.ResponseWriter, r *http.Request, tmpl string, td *models.TemplateData) {
 	var templateCache map[string]*template.Template
 
 	if app.UseCache {
@@ -36,7 +38,7 @@ func Template(w http.ResponseWriter, tmpl string, td *models.TemplateData) {
 
 	templateBuffer := new(bytes.Buffer)
 
-	td = AddDefaultData(td)
+	td = AddDefaultData(td, r)
 
 	_ = templatePage.Execute(templateBuffer, td)
 
