@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/mateusjunges/lets-go/internal/config"
+	"github.com/mateusjunges/lets-go/internal/forms"
 	"github.com/mateusjunges/lets-go/internal/models"
 	"github.com/mateusjunges/lets-go/internal/render"
 	"log"
@@ -53,7 +54,14 @@ func (m *Repository) About(w http.ResponseWriter, request *http.Request) {
 
 // Reservation renders the make a reservation page and displays form
 func (m *Repository) Reservation(w http.ResponseWriter, request *http.Request) {
-	render.Template(w, request, "make-reservation.page.tmpl", &models.TemplateData{})
+	render.Template(w, request, "make-reservation.page.tmpl", &models.TemplateData{
+		Form: forms.New(nil),
+	})
+}
+
+// SaveReservation handles the posting of a reservation form
+func (m *Repository) SaveReservation(w http.ResponseWriter, request *http.Request) {
+
 }
 
 // Majors renders the major room page
