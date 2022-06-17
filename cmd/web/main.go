@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 	"github.com/alexedwards/scs/v2"
-	"github.com/mateusjunges/lets-go/pkg/config"
-	"github.com/mateusjunges/lets-go/pkg/handlers"
-	"github.com/mateusjunges/lets-go/pkg/render"
+	"github.com/mateusjunges/lets-go/internal/config"
+	"github.com/mateusjunges/lets-go/internal/handlers"
+	"github.com/mateusjunges/lets-go/internal/render"
 	"log"
 	"net/http"
 	"time"

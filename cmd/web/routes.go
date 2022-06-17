@@ -3,8 +3,8 @@ package main
 import (
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
-	"github.com/mateusjunges/lets-go/pkg/config"
-	"github.com/mateusjunges/lets-go/pkg/handlers"
+	"github.com/mateusjunges/lets-go/internal/config"
+	"github.com/mateusjunges/lets-go/internal/handlers"
 	"net/http"
 )
 

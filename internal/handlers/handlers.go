@@ -3,9 +3,9 @@ package handlers
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/mateusjunges/lets-go/pkg/config"
-	"github.com/mateusjunges/lets-go/pkg/models"
-	"github.com/mateusjunges/lets-go/pkg/render"
+	"github.com/mateusjunges/lets-go/internal/config"
+	"github.com/mateusjunges/lets-go/internal/models"
+	"github.com/mateusjunges/lets-go/internal/render"
 	"log"
 	"net/http"
 )
