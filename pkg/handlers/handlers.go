@@ -1,10 +1,12 @@
 package handlers
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/mateusjunges/lets-go/pkg/config"
 	"github.com/mateusjunges/lets-go/pkg/models"
 	"github.com/mateusjunges/lets-go/pkg/render"
+	"log"
 	"net/http"
 )
 
@@ -74,9 +76,33 @@ func (m *Repository) Contact(w http.ResponseWriter, request *http.Request) {
 	render.Template(w, request, "contact.page.tmpl", &models.TemplateData{})
 }
 
+// SearchAvailability handles request for availability and renders the search availability page
 func (m *Repository) SearchAvailability(w http.ResponseWriter, request *http.Request) {
 	start := request.Form.Get("start")
 	end := request.Form.Get("end")
 
 	_, _ = w.Write([]byte(fmt.Sprintf("start date is %s and end date is %s", start, end)))
+}
+
+type jsonResponse struct {
+	Ok      bool   `json:"ok"`
+	Message string `json:"message"`
+}
+
+// SearchAvailabilityJson handles request for availability and responds with JSON
+func (m *Repository) SearchAvailabilityJson(w http.ResponseWriter, request *http.Request) {
+	response := jsonResponse{
+		Ok:      true,
+		Message: "Available!",
+	}
+
+	out, err := json.MarshalIndent(response, "", "    ")
+
+	if err != nil {
+		log.Println(err)
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+
+	_, _ = w.Write(out)
 }
